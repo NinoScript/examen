@@ -22,19 +22,19 @@
         <th>Cantidad</th>
         <th>Eliminar</th>
       </tr>
-      <tr v-for="detalle in detalles">
+      <tr v-for="detalle, i in detalles">
         <td>{{detalle.nombre}}</td>
         <td>
           <input v-model="detalle.cantidad">
         </td>
         <td>
-          <button v-on:click="algo">-</button>
+          <button v-on:click="eliminar(i)">-</button>
         </td>
       </tr>
     </table>
    
    Total a Pagar $ 
-   <button v-on:click="algo">Hacer Pedido</button>
+   <button v-on:click="eliminar">Hacer Pedido</button>
   </div>
   
 </template>
@@ -46,15 +46,12 @@ export default {
     return {
       selected: "Seleccione una carretera",
       carreteras: [],
-      detalles: [
-        { id: 1, nombre: "Ruta 18", precio: 100000 },
-        { id: 2, nombre: "Ruta 28", precio: 200000 },
-        { id: 3, nombre: "Ruta 38", precio: 300000 },
-      ]
+      detalles: []
     }
   },
   methods: {
-    algo: function(event) {
+    eliminar: function(indice) {
+      this.detalles.splice(indice,1)
     },
     agregar: function(event) {
       this.detalles.push({ id: this.selected.id, nombre: this.selected.nombre, precio: this.selected.precio, cantidad: 1 })
