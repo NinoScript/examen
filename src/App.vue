@@ -2,13 +2,13 @@
   <div id="app">
     <img src="./assets/logo.png">
     <template v-if='vista == "Inicio"'>
-      <div>Bienvenido usuario juanito</div>
+      <Inicio/>
     </template>
     <template v-else-if='vista == "CarroCompra"'>
       <CarroCompra/>
     </template>
     <template v-else-if='vista == "Historial"'>
-      <div>hola soy el pago en linea</div>
+      <Historial/>
     </template>
     <template v-else>
       <div>error</div>
@@ -22,12 +22,18 @@
 </template>
 
 <script>
+import Inicio from './components/Inicio'
 import CarroCompra from './components/CarroCompra'
+import Historial from './components/Historial'
+import Voucher from './components/Voucher'
 
 export default {
   name: 'app',
   components: {
-    CarroCompra
+    Inicio,
+    CarroCompra,
+    Historial,
+    Voucher
   },
   data () {
     return {
