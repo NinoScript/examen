@@ -1,9 +1,9 @@
 <template>
   <div>
-    <div>Rut: </div>
-    <div>Nombre: </div>
-    <div>Dirección: </div>
-    <div>Comprado Por: </div>
+    <div>Rut: {{usuario.rut}}</div>
+    <div>Nombre: {{usuario.nombre}}</div>
+    <div>Dirección: {{usuario.direccion}}</div>
+    <div>Comprado Por: {{usuario.encargado}}</div>
   
     <div>
       Seleccione Carretera, indique la cantidad y agregue al pedido.
@@ -58,6 +58,12 @@ export default {
   name: 'CarroCompra',
   data () {
     return {
+      usuario: {
+        nombre: "Perez Ltda",
+        rut: "12.345.678-K",
+        direccion: "4 Norte 1329, Viña del Mar",
+        encargado: "Juanito Perez"
+      },
       selected: "Seleccione una carretera",
       carreteras: [],
       detalles: [],
