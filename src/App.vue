@@ -10,6 +10,9 @@
     <template v-else-if='vista == "Historial"'>
       <Historial/>
     </template>
+    <template v-else-if='vista == "Voucher"'>
+      <Voucher/>
+    </template>
     <template v-else>
       <div>error</div>
     </template>
@@ -17,6 +20,7 @@
       <button class='boton-menu' v-on:click='cambiarVista("Inicio")'>Inicio</button>
       <button class='boton-menu' v-on:click='cambiarVista("CarroCompra")'>Carro de Compras</button>
       <button class='boton-menu' v-on:click='cambiarVista("Historial")'>Historial</button>
+      <button class='boton-menu' v-on:click='cambiarVista("Voucher")'>Voucher</button>
     </div>
   </div>
 </template>

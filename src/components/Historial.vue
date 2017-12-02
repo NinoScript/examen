@@ -1,5 +1,6 @@
 <template>
   <div>
+    <h1>Historial</h1>
     <div>Rut: {{usuario.rut}}</div>
     <div>Nombre: {{usuario.nombre}}</div>
     <div>Dirección: {{usuario.direccion}}</div>
