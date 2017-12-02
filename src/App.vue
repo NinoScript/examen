@@ -2,16 +2,19 @@
   <div id="app">
     <img src="./assets/logo.png">
     <HelloWorld/>
+    <CarroCompra/>
   </div>
 </template>
 
 <script>
 import HelloWorld from './components/HelloWorld'
+import CarroCompra from './components/CarroCompra'
 
 export default {
   name: 'app',
   components: {
     HelloWorld
+    CarroCompra
   }
 }
 </script>
