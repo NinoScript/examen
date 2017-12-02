@@ -8,11 +8,13 @@
     <div>
       Seleccione Carretera, indique la cantidad y agregue al pedido.
       <br/>
-      <select>
+      <select v-model="selected">
+        <option selected disabled>Seleccione una carretera</option>
         <template v-for="carretera in carreteras">
-          <option v-bind:value="{id: carretera.id}">{{carretera.nombre}}</option>
+          <option v-bind:value="carretera">{{carretera.nombre}}</option>
         </template>
       </select>
+    <button v-on:click="agregar">Agregar</button>
     </div>
     <table>
       <tr>
@@ -30,7 +32,11 @@
         </td>
       </tr>
     </table>
+   
+   Total a Pagar $ 
+   <button v-on:click="algo">Hacer Pedido</button>
   </div>
+  
 </template>
 
 <script>
@@ -38,11 +44,8 @@ export default {
   name: 'HelloWorld',
   data () {
     return {
-      carreteras: [
-        { id: 1, nombre: "Ruta 18", precio: 100000 },
-        { id: 2, nombre: "Ruta 28", precio: 200000 },
-        { id: 3, nombre: "Ruta 38", precio: 300000 },
-      ],
+      selected: "Seleccione una carretera",
+      carreteras: [],
       detalles: [
         { id: 1, nombre: "Ruta 18", precio: 100000 },
         { id: 2, nombre: "Ruta 28", precio: 200000 },
@@ -52,8 +55,24 @@ export default {
   },
   methods: {
     algo: function(event) {
-      console.log(this.detalles[0].cantidad)
+    },
+    agregar: function(event) {
+      this.detalles.push({ id: this.selected.id, nombre: this.selected.nombre, precio: this.selected.precio, cantidad: 1 })
     }
+  },
+  beforeMount () {
+    mock.onGet("carreteras").reply(200, [
+      { id: 1, nombre: "Ruta 18", precio: 100000 },
+      { id: 2, nombre: "Ruta 28", precio: 200000 },
+      { id: 3, nombre: "Ruta 38", precio: 300000 },
+    ])
+    
+    axios.get("carreteras").then((response) => {
+      this.carreteras = response.data
+      this.selected = this.carreteras[0]
+    }).catch(function (error) {
+      console.log("fallo por esto: " + error)
+    })
   }
 }
 </script>

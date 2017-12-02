@@ -2,7 +2,7 @@ import Vue from 'vue'
 import App from './App'
 import axios from 'axios'
 import MockAdapter from 'axios-mock-adapter'
-var mock = new MockAdapter(axios);
+var mock = new MockAdapter(axios, {delayResponse:200});
 
 Vue.config.productionTip = false
 
