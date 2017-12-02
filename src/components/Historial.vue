@@ -1,75 +1,46 @@
 <template>
   <div>
     <h1>Historial</h1>
-    <div>Rut: {{usuario.rut}}</div>
-    <div>Nombre: {{usuario.nombre}}</div>
-    <div>Dirección: {{usuario.direccion}}</div>
-    <div>Comprado Por: {{usuario.encargado}}</div>
   
-    <div>
-      Seleccione Carretera, indique la cantidad y agregue al pedido.
-      <br/>
-      <select v-model="selected">
-        <option selected disabled>Seleccione una carretera</option>
-        <template v-for="carretera in carreteras">
-          <option v-bind:value="carretera">{{carretera.nombre}}</option>
-        </template>
-      </select>
-    <button v-on:click="agregar">Agregar</button>
-  </div>
-  <div>
-    Opciones de Pago:
-    <input type="radio" v-model="pago" value="transferencia">Transferencia
-    <input type="radio" v-model="pago" value="pagoEnLinea">Pago en Línea
-    <input type="radio" v-model="pago" value="ordenDeCompra">Orden de Compra
-  </div>
-  <div>
-    Opciones de Retiro:
-    <input type="radio" v-model="retiro" value="oficina">Oficina
-    <input type="radio" v-model="retiro" value="envioCliente">Envío Cliente
-  </div>
   <div>
     <table>
       <tr>
-        <th>Carretera</th>
-        <th>Cantidad</th>
-        <th>Eliminar</th>
+        <th>Pedido</th>
+        <th>Total</th>
+        <th>Pedir</th>
       </tr>
-      <tr v-for="detalle, i in detalles">
-        <td>{{detalle.nombre}}</td>
+      <tr>
+        <td >{{juntar}}</td>
         <td>
-          <input v-model="detalle.cantidad">
+          {{total}}
         </td>
         <td>
-          <button v-on:click="eliminar(i)">-</button>
+          <button v-on:click="">+</button>
         </td>
       </tr>
     </table>
   </div>
     
    
-   Total a Pagar $ {{total}}
-   <button v-on:click="hacerPedido">Hacer Pedido</button>
   </div>
   
 </template>
 
 <script>
+  
 export default {
   name: 'Historial',
   data () {
     return {
-      usuario: {
-        nombre: "Perez Ltda",
-        rut: "12.345.678-K",
-        direccion: "4 Norte 1329, Viña del Mar",
-        encargado: "Juanito Perez"
-      },
+      nombres: "",
       selected: "Seleccione una carretera",
       carreteras: [],
-      detalles: [],
-      pago: undefined,
-      retiro: undefined
+      detalles: 
+      [
+        {id:1,nombre:"Ruta 18",precio:100000,cantidad:2},
+        {id:3,nombre:"Ruta 38",precio:300000,cantidad:4},
+        {id:2,nombre:"Ruta 28",precio:200000,cantidad:8}
+      ]
     }
   },
   methods: {
@@ -114,6 +85,11 @@ export default {
       return this.detalles
         .map(detalle => detalle.precio * detalle.cantidad)
         .reduce((memoria, elemento) => memoria + elemento, 0)
+    },
+    juntar: function(){
+      this.detalles.forEach(r=> this.nombres+=r.nombre+"-")
+      return this.nombres;
+      
     }
   }
 }
