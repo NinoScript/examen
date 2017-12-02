@@ -85,6 +85,13 @@ export default {
         detalle: this.detalles
       }
       console.log("hacemos un POST con "+JSON.stringify(jayson))
+    
+      axios.post("carreteras", jayson)
+        .then((response) => {
+          console.log(response);
+        }).catch(function (error) {
+          console.log("fallo por esto: " + error)
+        })
     }
   },
   beforeMount () {
