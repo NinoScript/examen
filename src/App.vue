@@ -1,7 +1,23 @@
 <template>
   <div id="app">
     <img src="./assets/logo.png">
-    <CarroCompra/>
+    <template v-if='vista == "Inicio"'>
+      <div>Bienvenido usuario juanito</div>
+    </template>
+    <template v-else-if='vista == "CarroCompra"'>
+      <CarroCompra/>
+    </template>
+    <template v-else-if='vista == "Historial"'>
+      <div>hola soy el pago en linea</div>
+    </template>
+    <template v-else>
+      <div>error</div>
+    </template>
+    <div id="menu">
+      <button class='boton-menu' v-on:click='cambiarVista("Inicio")'>Inicio</button>
+      <button class='boton-menu' v-on:click='cambiarVista("CarroCompra")'>Carro de Compras</button>
+      <button class='boton-menu' v-on:click='cambiarVista("Historial")'>Historial</button>
+    </div>
   </div>
 </template>
 
@@ -12,6 +28,16 @@ export default {
   name: 'app',
   components: {
     CarroCompra
+  },
+  data () {
+    return {
+      vista: 'Inicio'
+    }
+  },
+  methods: {
+    cambiarVista: function(vista) {
+      this.vista = vista
+    }
   }
 }
 </script>
@@ -24,5 +50,15 @@ export default {
   text-align: center;
   color: #2c3e50;
   margin-top: 60px;
+}
+
+#menu {
+  position: fixed;
+  left: 50px;
+  top: 50px;
+}
+.boton-menu {
+  float: left;
+  clear: left;
 }
 </style>
