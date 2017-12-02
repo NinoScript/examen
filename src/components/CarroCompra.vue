@@ -15,7 +15,19 @@
         </template>
       </select>
     <button v-on:click="agregar">Agregar</button>
-    </div>
+  </div>
+  <div>
+    Opciones de Pago:
+    <input type="radio" v-model="pago" value="transferencia">Transferencia
+    <input type="radio" v-model="pago" value="pagoEnLinea">Pago en Línea
+    <input type="radio" v-model="pago" value="ordenDeCompra">Orden de Compra
+  </div>
+  <div>
+    Opciones de Retiro:
+    <input type="radio" v-model="retiro" value="oficina">Oficina
+    <input type="radio" v-model="retiro" value="envioCliente">Envío Cliente
+  </div>
+  <div>
     <table>
       <tr>
         <th>Carretera</th>
@@ -32,21 +44,25 @@
         </td>
       </tr>
     </table>
+  </div>
+    
    
-   Total a Pagar $ 
-   <button v-on:click="eliminar">Hacer Pedido</button>
+   Total a Pagar $ {{total}}
+   <button v-on:click="hacerPedido">Hacer Pedido</button>
   </div>
   
 </template>
 
 <script>
 export default {
-  name: 'HelloWorld',
+  name: 'CarroCompra',
   data () {
     return {
       selected: "Seleccione una carretera",
       carreteras: [],
-      detalles: []
+      detalles: [],
+      pago: undefined,
+      retiro: undefined
     }
   },
   methods: {
@@ -55,6 +71,14 @@ export default {
     },
     agregar: function(event) {
       this.detalles.push({ id: this.selected.id, nombre: this.selected.nombre, precio: this.selected.precio, cantidad: 1 })
+    },
+    hacerPedido: function() {
+      const jayson = {
+        pago: this.pago,
+        retiro: this.retiro,
+        detalle: this.detalles
+      }
+      console.log("hacemos un POST con "+JSON.stringify(jayson))
     }
   },
   beforeMount () {
@@ -70,6 +94,13 @@ export default {
     }).catch(function (error) {
       console.log("fallo por esto: " + error)
     })
+  },
+  computed: {
+    total: function () {
+      return this.detalles
+        .map(detalle => detalle.precio * detalle.cantidad)
+        .reduce((memoria, elemento) => memoria + elemento, 0)
+    }
   }
 }
 </script>
