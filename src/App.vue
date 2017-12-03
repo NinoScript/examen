@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <img src="./assets/logo.png">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/6/62/Italian_traffic_signs_-_icona_autostrada.svg">
     <template v-if='vista == "Inicio"'>
       <Inicio/>
     </template>
@@ -13,6 +13,9 @@
     <template v-else-if='vista == "Voucher"'>
       <Voucher/>
     </template>
+    <template v-else-if='vista == "VerCarreteras"'>
+      <VerCarreteras/>
+    </template>
     <template v-else>
       <div>error</div>
     </template>
@@ -21,6 +24,7 @@
       <button class='boton-menu' v-on:click='cambiarVista("CarroCompra")'>Carro de Compras</button>
       <button class='boton-menu' v-on:click='cambiarVista("Historial")'>Historial</button>
       <button class='boton-menu' v-on:click='cambiarVista("Voucher")'>Voucher</button>
+      <button class='boton-menu' v-on:click='cambiarVista("VerCarreteras")'>Ver Carreteras</button>
     </div>
   </div>
 </template>
@@ -30,6 +34,7 @@ import Inicio from './components/Inicio'
 import CarroCompra from './components/CarroCompra'
 import Historial from './components/Historial'
 import Voucher from './components/Voucher'
+import VerCarreteras from './components/VerCarreteras'
 
 export default {
   name: 'app',
@@ -37,7 +42,8 @@ export default {
     Inicio,
     CarroCompra,
     Historial,
-    Voucher
+    Voucher,
+    VerCarreteras
   },
   data () {
     return {
