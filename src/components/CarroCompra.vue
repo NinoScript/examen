@@ -68,8 +68,8 @@ export default {
       selected: "Seleccione una carretera",
       carreteras: [],
       detalles: [],
-      pago: undefined,
-      retiro: undefined
+      pago: "transferencia",
+      retiro: "oficina"
     }
   },
   methods: {
