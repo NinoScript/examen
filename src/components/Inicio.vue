@@ -24,18 +24,6 @@ export default {
   methods: {
   },
   beforeMount () {
-    mock.onGet("carreteras").reply(200, [
-      { id: 1, nombre: "Ruta 18", precio: 100000 },
-      { id: 2, nombre: "Ruta 28", precio: 200000 },
-      { id: 3, nombre: "Ruta 38", precio: 300000 },
-    ])
-    
-    axios.get("carreteras").then((response) => {
-      this.carreteras = response.data
-      this.selected = this.carreteras[0]
-    }).catch(function (error) {
-      console.log("fallo por esto: " + error)
-    })
   },
   computed: {
   }
