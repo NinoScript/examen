@@ -12,10 +12,26 @@
       <tr>
         <td >{{juntar}}</td>
         <td>
-          {{total}}
+            {{total}}
         </td>
         <td>
           <button v-on:click="">+</button>
+        </td>
+      </tr>
+    </table>
+    <table>
+      <tr>
+        <th>Pedido</th>
+        <th>Total</th>
+        <th>Pedir</th>
+      </tr>
+      <tr v-for="detalle, i in detalles">
+        <td>{{juntar}}</td>
+        <td>
+          <input v-model="total">
+        </td>
+        <td>
+          <button v-on:click="eliminar(i)">+</button>
         </td>
       </tr>
     </table>
@@ -32,15 +48,12 @@ export default {
   name: 'Historial',
   data () {
     return {
+      id:[2],
       nombres: "",
-      selected: "Seleccione una carretera",
-      carreteras: [],
       detalles: 
       [
-        {id:1,nombre:"Ruta 18",precio:100000,cantidad:2},
-        {id:3,nombre:"Ruta 38",precio:300000,cantidad:4},
-        {id:2,nombre:"Ruta 28",precio:200000,cantidad:8}
-      ]
+      ],
+      cantidad:0
     }
   },
   methods: {
@@ -67,15 +80,21 @@ export default {
     }
   },
   beforeMount () {
+    axios.get("http://localhost:8080/Highway/JHistorial").then((response) => {
+      this.detalles = response.data
+    }).catch(function (error) {
+      console.log("fallo por esto: " + error)
+    })
   },
   computed: {
     total: function () {
       return this.detalles
+        .filter(detalle => detalle.id == 2)
         .map(detalle => detalle.precio * detalle.cantidad)
         .reduce((memoria, elemento) => memoria + elemento, 0)
     },
     juntar: function(){
-      this.detalles.forEach(r=> this.nombres+=r.nombre+"-")
+      this.detalles.filter(r=> r.id == 2).forEach(r=> this.nombres+=r.nombre+"-" )
       return this.nombres;
       
     }
