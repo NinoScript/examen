@@ -13,17 +13,17 @@ export default {
   name: 'Inicio',
   data () {
     return {
-      usuario: {
-        nombre: "Perez Ltda",
-        rut: "12.345.678-K",
-        direccion: "4 Norte 1329, Viña del Mar",
-        encargado: "Juanito Perez"
-      }
+      usuario: []
     }
   },
   methods: {
   },
   beforeMount () {
+    axios.get("http://localhost:8080/Highway/JInicio").then((response) => {
+      this.usuario = response.data
+    }).catch(function (error) {
+      console.log("fallo por esto: " + error)
+    })
   },
   computed: {
   }
