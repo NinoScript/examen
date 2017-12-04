@@ -5,13 +5,13 @@
       <Inicio/>
     </template>
     <template v-else-if='vista == "CarroCompra"'>
-      <CarroCompra/>
+      <CarroCompra v-on:openVoucher="abrirVoucher"/>
     </template>
     <template v-else-if='vista == "Historial"'>
       <Historial/>
     </template>
     <template v-else-if='vista == "Voucher"'>
-      <Voucher/>
+      <Voucher v-bind:datos="datosVoucher"/>
     </template>
     <template v-else-if='vista == "VerCarreteras"'>
       <VerCarreteras/>
@@ -23,8 +23,8 @@
       <button class='boton-menu' v-on:click='cambiarVista("Inicio")'>Inicio</button>
       <button class='boton-menu' v-on:click='cambiarVista("CarroCompra")'>Carro de Compras</button>
       <button class='boton-menu' v-on:click='cambiarVista("Historial")'>Historial</button>
-      <button class='boton-menu' v-on:click='cambiarVista("Voucher")'>Voucher</button>
       <button class='boton-menu' v-on:click='cambiarVista("VerCarreteras")'>Ver Carreteras</button>
+      <button v-if='datosVoucher != undefined' class='boton-menu' v-on:click='cambiarVista("Voucher")'>Ver último Voucher</button>
     </div>
   </div>
 </template>
@@ -47,12 +47,18 @@ export default {
   },
   data () {
     return {
-      vista: 'Inicio'
+      vista: 'Inicio',
+      datosVoucher: undefined
     }
   },
   methods: {
     cambiarVista: function(vista) {
       this.vista = vista
+    },
+    abrirVoucher: function(datos) {
+      this.datosVoucher = datos
+      this.vista = 'Voucher'
+      console.log("el dato del voucher:", datos)
     }
   }
 }
