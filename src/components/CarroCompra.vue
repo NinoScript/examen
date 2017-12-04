@@ -38,7 +38,7 @@
       <tr v-for="detalle, i in detalles">
         <td>{{detalle.nombre}}</td>
         <td>
-          <input v-model="detalle.cantidad">
+          <input type="number" v-model="detalle.cantidad">
         </td>
         <td>
           <button v-on:click="eliminar(i)">-</button>
