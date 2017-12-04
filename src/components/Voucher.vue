@@ -1,7 +1,7 @@
 <template>
   <div>
     <h1>Voucher</h1>
-    <div>Pedido Número: {{pedido}}</div>
+    <div>Pedido Número: {{datos.pedido}}</div>
     
   <div>
     <table>
@@ -9,7 +9,7 @@
         <th>Carretera</th>
         <th>Cantidad</th>
       </tr>
-      <tr v-for="detalle, i in detalles">
+      <tr v-for="detalle, i in datos.detalles">
         <td>{{detalle.nombre}}</td>
         <td>
           {{detalle.cantidad}}
@@ -17,10 +17,10 @@
       </tr>
     </table>
   </div>
-    
-   Total a Pagar $ {{total}}
+
+   <h2>Total a Pagar ${{total}}</h2>
    <br/>
-   Opción de Envío: {{retiro}}
+   Opción de Envío: {{datos.retiro}}
    <br/>
    Muchas Gracias por preferirnos
   </div>
@@ -32,17 +32,9 @@ export default {
   name: 'Voucher',
   data () {
     return {
-      pedido: 10000,
-      detalles: 
-      [
-        {id:1,nombre:"Ruta 18",precio:100000,cantidad:2},
-        {id:3,nombre:"Ruta 38",precio:300000,cantidad:4},
-        {id:2,nombre:"Ruta 28",precio:200000,cantidad:1},
-        {id:2,nombre:"Ruta 28",precio:200000,cantidad:8}
-      ],
-      retiro: "Oficina"
     }
   },
+  props: ['datos'],
   methods: {
     hacerPedido: function() {
       const jayson = {
@@ -64,7 +56,7 @@ export default {
   },
   computed: {
     total: function () {
-      return this.detalles
+      return this.datos.detalles
         .map(detalle => detalle.precio * detalle.cantidad)
         .reduce((memoria, elemento) => memoria + elemento, 0)
     }
