@@ -12,7 +12,7 @@
       </iframe>
     </div>
     <div>
-      <h2>Autop ista del Sol</h2>
+      <h2>Autopista del Sol</h2>
       <iframe
         width="550"
         height="300"
