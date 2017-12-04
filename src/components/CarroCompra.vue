@@ -87,9 +87,11 @@ export default {
       }
       console.log("hacemos un POST con "+JSON.stringify(jayson))
     
-      axios.post("carreteras", jayson)
+      axios.post("http://localhost:8080/Highway/JCompras", jayson)
         .then((response) => {
-          console.log(response);
+          console.log("funciono")
+          console.log(response.data.nombre);
+          this.$emit("openVoucher", response.data)
         }).catch(function (error) {
           console.log("fallo por esto: " + error)
         })
