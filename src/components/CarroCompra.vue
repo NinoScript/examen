@@ -1,17 +1,17 @@
 <template>
   <div>
     <h1>Carro de Compra</h1>
-    <div>Rut: {{usuario.rut}}</div>
-    <div>Nombre: {{usuario.nombre}}</div>
-    <div>Dirección: {{usuario.direccion}}</div>
-    <div>Comprado Por: {{usuario.encargado}}</div>
+    <div>Rut: {{datos.usuario.rut}}</div>
+    <div>Nombre: {{datos.usuario.nombre}}</div>
+    <div>Dirección: {{datos.usuario.direccion}}</div>
+    <div>Comprado Por: {{datos.usuario.encargado}}</div>
   
     <div>
       Seleccione Carretera, indique la cantidad y agregue al pedido.
       <br/>
-      <select v-model="selected">
+      <select v-model="datos.selected">
         <option selected disabled>Seleccione una carretera</option>
-        <template v-for="carretera in carreteras">
+        <template v-for="carretera in datos.carreteras">
           <option v-bind:value="carretera">{{carretera.nombre}}</option>
         </template>
       </select>
@@ -19,14 +19,14 @@
   </div>
   <div>
     Opciones de Pago:
-    <input type="radio" v-model="pago" value="transferencia">Transferencia
-    <input type="radio" v-model="pago" value="pagoEnLinea">Pago en Línea
-    <input type="radio" v-model="pago" value="ordenDeCompra">Orden de Compra
+    <input type="radio" v-model="datos.pago" value="transferencia">Transferencia
+    <input type="radio" v-model="datos.pago" value="pagoEnLinea">Pago en Línea
+    <input type="radio" v-model="datos.pago" value="ordenDeCompra">Orden de Compra
   </div>
   <div>
     Opciones de Retiro:
-    <input type="radio" v-model="retiro" value="oficina">Oficina
-    <input type="radio" v-model="retiro" value="envioCliente">Envío Cliente
+    <input type="radio" v-model="datos.retiro" value="oficina">Oficina
+    <input type="radio" v-model="datos.retiro" value="envioCliente">Envío Cliente
   </div>
   <div>
     <table>
@@ -35,7 +35,7 @@
         <th>Cantidad</th>
         <th>Eliminar</th>
       </tr>
-      <tr v-for="detalle, i in detalles">
+      <tr v-for="detalle, i in datos.detalles">
         <td>{{detalle.nombre}}</td>
         <td>
           <input type="number" v-model="detalle.cantidad">
@@ -57,33 +57,28 @@
 <script>
 export default {
   name: 'CarroCompra',
+  props: ['datos'],
   data () {
     return {
-      usuario: {
-        nombre: "Perez Ltda",
-        rut: "12.345.678-K",
-        direccion: "4 Norte 1329, Viña del Mar",
-        encargado: "Juanito Perez"
-      },
-      selected: "Seleccione una carretera",
-      carreteras: [],
-      detalles: [],
-      pago: "transferencia",
-      retiro: "oficina"
     }
   },
   methods: {
     eliminar: function(indice) {
-      this.detalles.splice(indice,1)
+      this.datos.detalles.splice(indice,1)
     },
     agregar: function(event) {
-      this.detalles.push({ id: this.selected.id, nombre: this.selected.nombre, precio: this.selected.precio, cantidad: 1 })
+      this.datos.detalles.push({
+        id: this.datos.selected.id,
+        nombre: this.datos.selected.nombre,
+        precio: this.datos.selected.precio,
+        cantidad: 1
+      })
     },
     hacerPedido: function() {
       const jayson = {
-        pago: this.pago,
-        retiro: this.retiro,
-        detalle: this.detalles
+        pago: this.datos.pago,
+        retiro: this.datos.retiro,
+        detalle: this.datos.detalles
       }
       console.log("hacemos un POST con "+JSON.stringify(jayson))
     
@@ -106,15 +101,15 @@ export default {
     // ]).onAny().passThrough();
     
     axios.get("/JCarreteras").then((response) => {
-      this.carreteras = response.data
-      this.selected = this.carreteras[0]
+      this.datos.carreteras = response.data
+      this.datos.selected = this.datos.carreteras[0]
     }).catch(function (error) {
       console.log("fallo por esto: " + error)
     })
   },
   computed: {
     total: function () {
-      return this.detalles
+      return this.datos.detalles
         .map(detalle => detalle.precio * detalle.cantidad)
         .reduce((memoria, elemento) => memoria + elemento, 0)
     }

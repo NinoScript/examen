@@ -5,10 +5,10 @@
       <Inicio/>
     </template>
     <template v-else-if='vista == "CarroCompra"'>
-      <CarroCompra v-on:openVoucher="abrirVoucher"/>
+      <CarroCompra v-on:openVoucher="abrirVoucher" v-bind:datos="datosCarroCompra"/>
     </template>
     <template v-else-if='vista == "Historial"'>
-      <Historial/>
+      <Historial v-on:openCarroCompra="abrirCarroCompra"/>
     </template>
     <template v-else-if='vista == "Voucher"'>
       <Voucher v-bind:datos="datosVoucher"/>
@@ -48,7 +48,20 @@ export default {
   data () {
     return {
       vista: 'Inicio',
-      datosVoucher: undefined
+      datosVoucher: undefined,
+      datosCarroCompra: {
+        usuario: {
+          nombre: "Perez Ltda",
+          rut: "12.345.678-K",
+          direccion: "4 Norte 1329, Viña del Mar",
+          encargado: "Juanito Perez"
+        },
+        selected: "Seleccione una carretera",
+        carreteras: [],
+        detalles: [],
+        pago: "transferencia",
+        retiro: "oficina"
+      },
     }
   },
   methods: {
@@ -59,7 +72,19 @@ export default {
       this.datosVoucher = datos
       this.vista = 'Voucher'
       console.log("el dato del voucher:", datos)
+    },
+    abrirCarroCompra: function(datos) {
+      this.datosCarroCompra.detalles = datos
+      this.vista = 'CarroCompra'
+      console.log("el dato del carro de compra:", datos)
     }
+  },
+  beforeMount () {
+    axios.get("/JUsuario").then((response) => {
+      console.log("usuario: ", response.data)
+    }).catch(function (error) {
+      console.log("fallo por esto: " + error)
+    })
   }
 }
 </script>

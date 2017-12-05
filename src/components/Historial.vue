@@ -9,29 +9,11 @@
         <th>Total</th>
         <th>Pedir</th>
       </tr>
-      <tr>
-        <td >{{juntar}}</td>
+      <tr v-for="dato in historial">
+        <td>{{dato.pedido}}</td>
+        <td>{{dato.total}}</td>
         <td>
-            {{total}}
-        </td>
-        <td>
-          <button v-on:click="">+</button>
-        </td>
-      </tr>
-    </table>
-    <table>
-      <tr>
-        <th>Pedido</th>
-        <th>Total</th>
-        <th>Pedir</th>
-      </tr>
-      <tr v-for="detalle, i in detalles">
-        <td>{{juntar}}</td>
-        <td>
-          <input v-model="total">
-        </td>
-        <td>
-          <button v-on:click="eliminar(i)">+</button>
+          <button v-on:click="pedir(dato.id, dato.detalle)">+</button>
         </td>
       </tr>
     </table>
@@ -48,35 +30,12 @@ export default {
   name: 'Historial',
   data () {
     return {
-      id:[2],
-      nombres: "",
-      detalles: 
-      [
-      ],
-      cantidad:0
+      detalles: []
     }
   },
   methods: {
-    eliminar: function(indice) {
-      this.detalles.splice(indice,1)
-    },
-    agregar: function(event) {
-      this.detalles.push({ id: this.selected.id, nombre: this.selected.nombre, precio: this.selected.precio, cantidad: 1 })
-    },
-    hacerPedido: function() {
-      const jayson = {
-        pago: this.pago,
-        retiro: this.retiro,
-        detalle: this.detalles
-      }
-      console.log("hacemos un POST con "+JSON.stringify(jayson))
-    
-      axios.post("carreteras", jayson)
-        .then((response) => {
-          console.log(response);
-        }).catch(function (error) {
-          console.log("fallo por esto: " + error)
-        })
+    pedir: function(id_compra, detalle) {
+      this.$emit("openCarroCompra", detalle)
     }
   },
   beforeMount () {
@@ -87,16 +46,34 @@ export default {
     })
   },
   computed: {
-    total: function () {
-      return this.detalles
-        .filter(detalle => detalle.id == 2)
-        .map(detalle => detalle.precio * detalle.cantidad)
-        .reduce((memoria, elemento) => memoria + elemento, 0)
-    },
-    juntar: function(){
-      this.detalles.filter(r=> r.id == 2).forEach(r=> this.nombres+=r.nombre+"-" )
-      return this.nombres;
-      
+    historial: function(){
+      function historial(detalles) {
+        function groupBy(xs, key) {
+          return xs.reduce(function(rv, x) {
+            (rv[x[key]] = rv[x[key]] || []).push(x);
+            return rv;
+          }, {});
+        };
+        
+        const agrupados = groupBy(detalles, "id");
+        
+        return Object.keys(agrupados).map(id => {
+          const valores = agrupados[id];
+          
+          const total = valores
+            .map(detalle => detalle.precio * detalle.cantidad)
+            .reduce((memoria, elemento) => memoria + elemento, 0);
+          
+          const pedido = valores
+            .map(detalle => detalle.nombre)
+            .join("-");
+          
+            const detalle = valores;
+          
+          return { "id": parseInt(id), "pedido": pedido, "total": total, "detalle": detalle };
+        })
+      }
+      return historial(this.detalles);
     }
   }
 }
