@@ -1,10 +1,10 @@
 <template>
   <div>
     <h1>Carro de Compra</h1>
-    <div>Rut: {{datos.usuario.rut}}</div>
-    <div>Nombre: {{datos.usuario.nombre}}</div>
-    <div>Dirección: {{datos.usuario.direccion}}</div>
-    <div>Comprado Por: {{datos.usuario.encargado}}</div>
+    <div>Rut: {{datosUsuario.empresa.rutEmpresa}}</div>
+    <div>Nombre: {{datosUsuario.empresa.nombreEmpresa}}</div>
+    <div>Dirección: {{datosUsuario.empresa.direccion}}</div>
+    <div>Comprado Por: {{datosUsuario.encargado.nombre}}</div>
   
     <div>
       Seleccione Carretera, indique la cantidad y agregue al pedido.
@@ -57,7 +57,7 @@
 <script>
 export default {
   name: 'CarroCompra',
-  props: ['datos'],
+  props: ['datos', 'datosUsuario'],
   data () {
     return {
     }

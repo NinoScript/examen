@@ -1,7 +1,7 @@
 <template>
   <div>
     <h1>Inicio</h1>
-    <div>Bienvenido {{usuario.nombre}}</div>
+    <div>Bienvenido {{datosUsuario.encargado.nombre}}</div>
 
   </div>
   
@@ -11,9 +11,9 @@
 <script>
 export default {
   name: 'Inicio',
+  props: ['datosUsuario'],
   data () {
     return {
-      usuario: []
     }
   },
   methods: {

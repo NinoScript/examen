@@ -2,10 +2,13 @@
   <div id="app">
     <img src="https://upload.wikimedia.org/wikipedia/commons/6/62/Italian_traffic_signs_-_icona_autostrada.svg">
     <template v-if='vista == "Inicio"'>
-      <Inicio/>
+      <Inicio v-bind:datosUsuario="datosUsuario"/>
     </template>
     <template v-else-if='vista == "CarroCompra"'>
-      <CarroCompra v-on:openVoucher="abrirVoucher" v-bind:datos="datosCarroCompra"/>
+      <CarroCompra
+        v-on:openVoucher="abrirVoucher"
+        v-bind:datos="datosCarroCompra"
+        v-bind:datosUsuario="datosUsuario"/>
     </template>
     <template v-else-if='vista == "Historial"'>
       <Historial v-on:openCarroCompra="abrirCarroCompra"/>
@@ -50,18 +53,24 @@ export default {
       vista: 'Inicio',
       datosVoucher: undefined,
       datosCarroCompra: {
-        usuario: {
-          nombre: "Perez Ltda",
-          rut: "12.345.678-K",
-          direccion: "4 Norte 1329, Viña del Mar",
-          encargado: "Juanito Perez"
-        },
         selected: "Seleccione una carretera",
         carreteras: [],
         detalles: [],
         pago: "transferencia",
         retiro: "oficina"
       },
+      datosUsuario: {
+        "encargado": {
+          "rutEmpresa": "11111111-1",
+          "nombre": "Juan Perez",
+          "login": "jperez"
+        },
+        "empresa": {
+          "rutEmpresa": "11111111-1",
+          "nombreEmpresa": "empresa 1",
+          "direccion": "direccion 1"
+        }
+      }
     }
   },
   methods: {
@@ -80,8 +89,9 @@ export default {
     }
   },
   beforeMount () {
-    axios.get("/JUsuario").then((response) => {
-      console.log("usuario: ", response.data)
+    axios.get("/JInicio").then((response) => {
+      // this.datosUsuario = response.data;
+      console.log("datos usuario: ", response.data)
     }).catch(function (error) {
       console.log("fallo por esto: " + error)
     })
