@@ -80,7 +80,7 @@ export default {
     }
   },
   beforeMount () {
-    axios.get("http://localhost:8080/Highway/JHistorial").then((response) => {
+    axios.get("/JHistorial").then((response) => {
       this.detalles = response.data
     }).catch(function (error) {
       console.log("fallo por esto: " + error)

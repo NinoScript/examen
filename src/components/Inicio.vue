@@ -19,7 +19,7 @@ export default {
   methods: {
   },
   beforeMount () {
-    axios.get("http://localhost:8080/Highway/JInicio").then((response) => {
+    axios.get("/JInicio").then((response) => {
       this.usuario = response.data
     }).catch(function (error) {
       console.log("fallo por esto: " + error)

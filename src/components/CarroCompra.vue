@@ -87,7 +87,7 @@ export default {
       }
       console.log("hacemos un POST con "+JSON.stringify(jayson))
     
-      axios.post("http://localhost:8080/Highway/JCompras", jayson)
+      axios.post("/JCompras", jayson)
         .then((response) => {
           console.log("funciono")
           console.log(response.data.nombre);
@@ -99,13 +99,13 @@ export default {
   },
   beforeMount () {
     // var mock = new MockAdapter(axios, {delayResponse:200});
-    // mock.onGet("http://localhost:8080/Highway/JCarreteras").reply(200, [
+    // mock.onGet("/JCarreteras").reply(200, [
     //   { id: 1, nombre: "Ruta 18", precio: 100000 },
     //   { id: 2, nombre: "Ruta 28", precio: 200000 },
     //   { id: 3, nombre: "Ruta 38", precio: 300000 },
     // ]).onAny().passThrough();
     
-    axios.get("http://localhost:8080/Highway/JCarreteras").then((response) => {
+    axios.get("/JCarreteras").then((response) => {
       this.carreteras = response.data
       this.selected = this.carreteras[0]
     }).catch(function (error) {
