@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <img src="https://upload.wikimedia.org/wikipedia/commons/6/62/Italian_traffic_signs_-_icona_autostrada.svg">
+    <img src="logo.svg">
     <template v-if='vista == "Inicio"'>
       <Inicio v-bind:datosUsuario="datosUsuario"/>
     </template>
