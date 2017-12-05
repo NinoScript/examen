@@ -3,7 +3,7 @@
     <h1>Historial</h1>
   
   <div>
-    <table>
+    <table class="greenTable">
       <tr>
         <th>Pedido</th>
         <th>Total</th>
@@ -13,7 +13,7 @@
         <td>{{dato.pedido}}</td>
         <td>{{dato.total}}</td>
         <td>
-          <button v-on:click="pedir(dato.id, dato.detalle)">+</button>
+          <button class="boton_enano" v-on:click="pedir(dato.id, dato.detalle)">+</button>
         </td>
       </tr>
     </table>

@@ -100,6 +100,146 @@ export default {
 </script>
 
 <style>
+  .boton-menu {
+    border-radius: 4px;
+    background-color: #66CDAA;
+    border: none;
+    color: #FFFFFF;
+    text-align: center;
+    font-size: 15px;
+    padding: 10px;
+    width: 150px;
+    transition: all 0.5s;
+    cursor: pointer;
+    margin: 5px;
+  }
+  
+  .boton_chico {
+    border-radius: 4px;
+    background-color: #66CDAA;
+    border: none;
+    color: #000000;
+    text-align: center;
+    font-size: 12px;
+    padding: 7px;
+    width: 125px;
+    transition: all 0.5s;
+    cursor: pointer;
+    margin: 5px;
+  }
+  
+  .boton_enano {
+    border-radius: 4px;
+    background-color: #66CDAA;
+    border: none;
+    color: #000000;
+    text-align: center;
+    font-size: 12px;
+    padding: 7px;
+    width: 30px;
+    transition: all 0.5s;
+    cursor: pointer;
+    margin: 5px;
+  }
+
+  .button span {
+    cursor: pointer;
+    display: inline-block;
+    position: relative;
+    transition: 0.5s;
+  }
+
+  .button span:after {
+    content: '\00bb';
+    position: absolute;
+    opacity: 0;
+    top: 0;
+    right: -20px;
+    transition: 0.5s;
+  }
+
+  .button:hover span {
+    padding-right: 25px;
+  }
+
+  .button:hover span:after {
+    opacity: 1;
+    right: 0;
+  }
+  table {
+      border-collapse: collapse;
+      margin:auto;
+  }
+
+  th, td {
+    border-bottom: 1px solid #ddd;
+      padding: 8px;
+  }
+
+  tr:nth-child(even){background-color: #f2f2f2}
+  
+  table.greenTable {
+    font-family: Arial, Helvetica, sans-serif;
+    border: 2px solid #24943A;
+    background-color: #D4EED1;
+    text-align: center;
+  }
+  table.greenTable td, table.greenTable th {
+    border: 1px solid #24943A;
+    padding: 3px 2px;
+  }
+  table.greenTable tbody td {
+    font-size: 13px;
+  }
+  table.greenTable thead {
+    background: #24943A;
+    background: -moz-linear-gradient(top, #5baf6b 0%, #3a9e4d 66%, #24943A 100%);
+    background: -webkit-linear-gradient(top, #5baf6b 0%, #3a9e4d 66%, #24943A 100%);
+    background: linear-gradient(to bottom, #5baf6b 0%, #3a9e4d 66%, #24943A 100%);
+    border-bottom: 0px solid #444444;
+  }
+  table.greenTable thead th {
+    font-size: 19px;
+    font-weight: bold;
+    color: #F0F0F0;
+    text-align: left;
+    border-left: 2px solid #24943A;
+  }
+  table.greenTable thead th:first-child {
+    border-left: none;
+  }
+
+  table.greenTable tfoot {
+    font-size: 13px;
+    font-weight: bold;
+    color: #F0F0F0;
+    background: #24943A;
+    background: -moz-linear-gradient(top, #5baf6b 0%, #3a9e4d 66%, #24943A 100%);
+    background: -webkit-linear-gradient(top, #5baf6b 0%, #3a9e4d 66%, #24943A 100%);
+    background: linear-gradient(to bottom, #5baf6b 0%, #3a9e4d 66%, #24943A 100%);
+    border-top: 1px solid #24943A;
+  }
+  table.greenTable tfoot td {
+    font-size: 13px;
+  }
+  table.greenTable tfoot .links {
+    text-align: right;
+  }
+  table.greenTable tfoot .links a{
+    display: inline-block;
+    background: #FFFFFF;
+    color: #24943A;
+    padding: 2px 8px;
+    border-radius: 2px;
+  }
+  
+  html{
+    background-image: url("http://www.mulierchile.com/aqua-wallpaper/aqua-wallpaper-006.jpg") ;
+    -webkit-background-size: cover;
+    -moz-background-size:cover;
+    -o-background-size:cover;
+    background-size:cover;
+  }
 #app {
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -107,6 +247,7 @@ export default {
   text-align: center;
   color: #2c3e50;
   margin-top: 60px;
+  
 }
 
 #menu {

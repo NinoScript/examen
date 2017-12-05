@@ -4,7 +4,7 @@
     <div>Pedido Número: {{datos.pedido}}</div>
     
   <div>
-    <table>
+    <table class="greenTable">
       <tr>
         <th>Carretera</th>
         <th>Cantidad</th>
