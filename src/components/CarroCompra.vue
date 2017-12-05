@@ -15,7 +15,7 @@
           <option v-bind:value="carretera">{{carretera.nombre}}</option>
         </template>
       </select>
-    <button v-on:click="agregar">Agregar</button>
+    <button class="boton_chico" v-on:click="agregar">Agregar</button>
   </div>
   <div>
     Opciones de Pago:
@@ -29,7 +29,7 @@
     <input type="radio" v-model="datos.retiro" value="envioCliente">Envío Cliente
   </div>
   <div>
-    <table>
+    <table class="greenTable">
       <tr>
         <th>Carretera</th>
         <th>Cantidad</th>
@@ -41,15 +41,16 @@
           <input type="number" v-model="detalle.cantidad">
         </td>
         <td>
-          <button v-on:click="eliminar(i)">-</button>
+          <button class="boton_enano" v-on:click="eliminar(i)">-</button>
         </td>
       </tr>
     </table>
   </div>
     
-   
+   <h2><div >
    Total a Pagar $ {{total}}
-   <button v-on:click="hacerPedido">Hacer Pedido</button>
+ </div></h2>
+   <button class="boton_chico" v-on:click="hacerPedido">Hacer Pedido</button>
   </div>
   
 </template>
@@ -67,12 +68,19 @@ export default {
       this.datos.detalles.splice(indice,1)
     },
     agregar: function(event) {
-      this.datos.detalles.push({
-        id: this.datos.selected.id,
-        nombre: this.datos.selected.nombre,
-        precio: this.datos.selected.precio,
-        cantidad: 1
-      })
+      const detalleAntiguo = this.datos.detalles.find(detalle => {
+        return detalle.id == this.datos.selected.id;
+      });
+      if (detalleAntiguo == undefined) {
+        this.datos.detalles.push({
+          id: this.datos.selected.id,
+          nombre: this.datos.selected.nombre,
+          precio: this.datos.selected.precio,
+          cantidad: 1
+        })} else {
+            detalleAntiguo.cantidad = parseInt(detalleAntiguo.cantidad) + 1;
+          }
+      
     },
     hacerPedido: function() {
       const jayson = {
