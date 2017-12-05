@@ -90,7 +90,7 @@ export default {
   },
   beforeMount () {
     axios.get("/JInicio").then((response) => {
-      // this.datosUsuario = response.data;
+      this.datosUsuario = response.data;
       console.log("datos usuario: ", response.data)
     }).catch(function (error) {
       console.log("fallo por esto: " + error)
