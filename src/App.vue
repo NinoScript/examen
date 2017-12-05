@@ -28,6 +28,10 @@
       <button class='boton-menu' v-on:click='cambiarVista("Historial")'>Historial</button>
       <button class='boton-menu' v-on:click='cambiarVista("VerCarreteras")'>Ver Carreteras</button>
       <button v-if='datosVoucher != undefined' class='boton-menu' v-on:click='cambiarVista("Voucher")'>Ver último Voucher</button>
+
+      <form action="/privado/logout.jsp">
+          <input class='boton-menu' type="submit" value="Salir" />
+      </form>
     </div>
   </div>
 </template>
