@@ -183,58 +183,44 @@ export default {
   tr:nth-child(even){background-color: #f2f2f2}
   
   table.greenTable {
-    font-family: Arial, Helvetica, sans-serif;
-    border: 2px solid #24943A;
-    background-color: #D4EED1;
+    border: 2px solid #FFFFFF;
+    background-color: #FFFFFF;
     text-align: center;
+    border-collapse: collapse;
   }
   table.greenTable td, table.greenTable th {
-    border: 1px solid #24943A;
-    padding: 3px 2px;
+    border: 1px solid #FFFFFF;
+    padding: 3px 4px;
   }
   table.greenTable tbody td {
     font-size: 13px;
   }
+  table.greenTable tr:nth-child(even) {
+    background: #BDF0E3;
+  }
   table.greenTable thead {
-    background: #24943A;
-    background: -moz-linear-gradient(top, #5baf6b 0%, #3a9e4d 66%, #24943A 100%);
-    background: -webkit-linear-gradient(top, #5baf6b 0%, #3a9e4d 66%, #24943A 100%);
-    background: linear-gradient(to bottom, #5baf6b 0%, #3a9e4d 66%, #24943A 100%);
-    border-bottom: 0px solid #444444;
+    background: #FFFFFF;
+    border-bottom: 4px solid #333333;
   }
   table.greenTable thead th {
-    font-size: 19px;
+    font-size: 15px;
     font-weight: bold;
-    color: #F0F0F0;
-    text-align: left;
-    border-left: 2px solid #24943A;
+    color: #333333;
+    text-align: center;
+    border-left: 2px solid #333333;
   }
   table.greenTable thead th:first-child {
     border-left: none;
   }
 
   table.greenTable tfoot {
-    font-size: 13px;
+    font-size: 14px;
     font-weight: bold;
-    color: #F0F0F0;
-    background: #24943A;
-    background: -moz-linear-gradient(top, #5baf6b 0%, #3a9e4d 66%, #24943A 100%);
-    background: -webkit-linear-gradient(top, #5baf6b 0%, #3a9e4d 66%, #24943A 100%);
-    background: linear-gradient(to bottom, #5baf6b 0%, #3a9e4d 66%, #24943A 100%);
-    border-top: 1px solid #24943A;
+    color: #333333;
+    border-top: 4px solid #333333;
   }
   table.greenTable tfoot td {
-    font-size: 13px;
-  }
-  table.greenTable tfoot .links {
-    text-align: right;
-  }
-  table.greenTable tfoot .links a{
-    display: inline-block;
-    background: #FFFFFF;
-    color: #24943A;
-    padding: 2px 8px;
-    border-radius: 2px;
+    font-size: 14px;
   }
   
   html{

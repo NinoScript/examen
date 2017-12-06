@@ -55,7 +55,7 @@ export default {
           }, {});
         };
         
-        const agrupados = groupBy(detalles, "id");
+        const agrupados = groupBy(detalles, "idCompra");
         
         return Object.keys(agrupados).map(id => {
           const valores = agrupados[id];
@@ -70,7 +70,7 @@ export default {
           
             const detalle = valores;
           
-          return { "id": parseInt(id), "pedido": pedido, "total": total, "detalle": detalle };
+          return { "idCompra": parseInt(id), "pedido": pedido, "total": total, "detalle": detalle};
         })
       }
       return historial(this.detalles);

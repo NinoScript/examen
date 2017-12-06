@@ -77,9 +77,10 @@ export default {
           nombre: this.datos.selected.nombre,
           precio: this.datos.selected.precio,
           cantidad: 1
-        })} else {
-            detalleAntiguo.cantidad = parseInt(detalleAntiguo.cantidad) + 1;
-          }
+        })
+      } else {
+        detalleAntiguo.cantidad = parseInt(detalleAntiguo.cantidad) + 1;
+      }
       
     },
     hacerPedido: function() {
